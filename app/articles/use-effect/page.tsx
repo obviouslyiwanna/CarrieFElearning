@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import BackButton from "../../components/BackButton";
 
 export const metadata: Metadata = { title: "useEffect 实战 · CarrieFElearning", description: "理解 useEffect 如何等待异步依赖准备完成后再触发一次查询。" };
 
 export default function UseEffectArticle() {
   return <main className="article-page">
-    <header className="article-page-top"><Link href="/" className="back-link">← CarrieFElearning</Link><span>React 基础 · 6 min</span></header>
+    <header className="article-page-top"><BackButton className="back-link">← 返回上一页</BackButton><span>React 基础 · 6 min</span></header>
     <article className="article-reader">
       <p className="eyebrow"><span /> React learning journal · 01</p>
       <h1>useEffect 实战：等待依赖准备好再发起一次查询</h1>
@@ -25,7 +25,7 @@ export default function UseEffectArticle() {
       <h3>3. 依赖数组决定时机</h3>
       <p>第一次渲染时枚举可能还没准备好；当 <code>pendingEnumReady</code> 变成 <code>true</code>，effect 会再次执行，并触发一次查询。这就是“先准备依赖，再执行副作用”。</p>
       <blockquote>一句话总结：等待待办页面所需的枚举条件准备完成，再在渲染后触发一次列表查询，同时避开全量列表的重复请求。</blockquote>
-      <Link href="/" className="back-home">返回全部笔记 <span>→</span></Link>
+      <BackButton className="back-home">返回上一页 <span>→</span></BackButton>
     </article>
   </main>;
 }

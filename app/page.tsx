@@ -2,13 +2,13 @@
 
 import { useMemo, useState } from "react";
 
-type Article = { title: string; summary: string; category: string; date: string; readingTime: string; accent: string; status: "已发布" | "学习中"; href: string };
+type Article = { title: string; summary: string; category: string; date: string; readingTime: string; accent: string; status: "已发布" | "学习中"; href: string; visual: string };
 
 const articles: Article[] = [
-  { title: "useEffect 实战：等待依赖准备好再发起一次查询", summary: "从一个 ProTable 列表页的真实场景出发，拆开理解副作用、依赖数组与异步枚举之间的执行时机。", category: "React 基础", date: "2026.08.06", readingTime: "6 min", accent: "orange", status: "已发布", href: "/articles/use-effect" },
-  { title: "useUrlParams：从 URL 里读取页面参数", summary: "理解自定义 Hook 如何读取 URL query 参数，并按照传入顺序返回页面需要的值。", category: "React 基础", date: "2026.08.06", readingTime: "5 min", accent: "blue", status: "已发布", href: "/articles/use-url-params" },
-  { title: "把复杂需求拆成可维护的 React 页面", summary: "配方管理、扣款单、采退订单：从业务流程到组件边界，记录我如何把一次交付变成可复用的解题路径。", category: "工程实践", date: "即将开始", readingTime: "—", accent: "green", status: "学习中", href: "#roadmap" },
-  { title: "React 学习路线：从渲染到状态管理", summary: "一张正在迭代的学习地图：先建立 mental model，再逐步补齐组件、Hooks、数据流和性能优化。", category: "学习路线", date: "即将开始", readingTime: "—", accent: "green", status: "学习中", href: "#roadmap" },
+  { title: "useEffect 实战：等待依赖准备好再发起一次查询", summary: "从一个 ProTable 列表页的真实场景出发，拆开理解副作用、依赖数组与异步枚举之间的执行时机。", category: "React 基础", date: "2026.08.06", readingTime: "6 min", accent: "orange", status: "已发布", href: "/articles/use-effect", visual: "useEffect" },
+  { title: "useUrlParams：从 URL 里读取页面参数", summary: "理解自定义 Hook 如何读取 URL query 参数，并按照传入顺序返回页面需要的值。", category: "React 基础", date: "2026.08.06", readingTime: "5 min", accent: "blue", status: "已发布", href: "/articles/use-url-params", visual: "Custom Hook" },
+  { title: "把复杂需求拆成可维护的 React 页面", summary: "配方管理、扣款单、采退订单：从业务流程到组件边界，记录我如何把一次交付变成可复用的解题路径。", category: "工程实践", date: "即将开始", readingTime: "—", accent: "green", status: "学习中", href: "#roadmap", visual: "业务工程化" },
+  { title: "React 学习路线：从渲染到状态管理", summary: "一张正在迭代的学习地图：先建立 mental model，再逐步补齐组件、Hooks、数据流和性能优化。", category: "学习路线", date: "即将开始", readingTime: "—", accent: "green", status: "学习中", href: "#roadmap", visual: "React Roadmap" },
 ];
 
 const categories = ["全部", "React 基础", "工程实践", "学习路线"];
@@ -41,7 +41,7 @@ export default function Home() {
       <section className="section articles-section" id="articles">
         <div className="section-heading"><div><p className="eyebrow"><span /> latest notes</p><h2>最近在学什么</h2></div><div className="article-tools"><label className="search-box"><span aria-hidden="true">⌕</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索笔记" aria-label="搜索笔记" /></label></div></div>
         <div className="category-tabs" role="tablist" aria-label="笔记分类">{categories.map((category) => <button key={category} className={activeCategory === category ? "selected" : ""} onClick={() => setActiveCategory(category)} role="tab" aria-selected={activeCategory === category}>{category}</button>)}</div>
-        <div className="article-grid">{visibleArticles.map((article, index) => <article className={`article-card ${index === 0 ? "featured" : ""}`} key={article.title}><div className={`article-art ${article.accent}`}><span>{String(index + 1).padStart(2, "0")}</span><i /></div><div className="article-content"><div className="article-meta"><span className="tag">{article.category}</span><span>{article.status}</span></div><h3><a href={article.href}>{article.title}</a></h3><p>{article.summary}</p><div className="article-footer"><span>{article.date}</span><span>{article.readingTime} <b>→</b></span></div></div></article>)}</div>
+        <div className="article-grid">{visibleArticles.map((article, index) => <article className={`article-card ${index === 0 ? "featured" : ""}`} key={article.title}><div className={`article-art ${article.accent}`}><span>{String(index + 1).padStart(2, "0")}</span><strong className="article-topic">{article.visual}</strong></div><div className="article-content"><div className="article-meta"><span className="tag">{article.category}</span><span>{article.status}</span></div><h3><a href={article.href}>{article.title}</a></h3><p>{article.summary}</p><div className="article-footer"><span>{article.date}</span><span>{article.readingTime} <b>→</b></span></div></div></article>)}</div>
         {visibleArticles.length === 0 && <p className="empty-state">没有找到匹配的笔记，换个关键词试试。</p>}
       </section>
 
