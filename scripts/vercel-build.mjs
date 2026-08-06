@@ -31,9 +31,23 @@ for (const entry of readdirSync(clientDir)) {
   cpSync(source, destination, { recursive: true });
 }
 
-const articleHtml = join(outputDir, "articles/use-effect.html");
-if (existsSync(articleHtml)) {
-  const articleDir = join(outputDir, "articles/use-effect");
-  mkdirSync(articleDir, { recursive: true });
-  renameSync(articleHtml, join(articleDir, "index.html"));
+function normalizeHtmlRoutes(directory) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const source = join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      normalizeHtmlRoutes(source);
+      continue;
+    }
+
+    if (!entry.name.endsWith(".html") || entry.name === "index.html" || entry.name === "404.html") {
+      continue;
+    }
+
+    const routeDir = join(directory, entry.name.slice(0, -5));
+    mkdirSync(routeDir, { recursive: true });
+    renameSync(source, join(routeDir, "index.html"));
+  }
 }
+
+normalizeHtmlRoutes(outputDir);
