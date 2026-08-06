@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import BackButton from "../../components/BackButton";
 
 export const metadata: Metadata = { title: "useUrlParams 实战 · CarrieFElearning", description: "理解自定义 Hook 如何读取 URL query 参数。" };
 
 export default function UseUrlParamsArticle() {
   return <main className="article-page">
-    <header className="article-page-top"><Link href="/" className="back-link">← CarrieFElearning</Link><span>React 基础 · 5 min</span></header>
+    <header className="article-page-top"><BackButton className="back-link">← 返回上一页</BackButton><span>React 基础 · 5 min</span></header>
     <article className="article-reader">
       <p className="eyebrow"><span /> React learning journal · 02</p>
       <h1>useUrlParams：从 URL 里读取页面参数</h1>
@@ -50,7 +50,7 @@ export function useUrlParams(...keys: string[]): Array<string | undefined> {
       <p>这个 Hook 只负责读取 URL，不负责修改 URL。它返回的是字符串，因为 URL query 参数本身都是字符串。如果后续需要数字，要在使用处转换，例如 <code>Number(id)</code>。</p>
       <p>另外，<code>params.get('id')</code> 只取一个值。如果 URL 中有多个同名参数，需要使用 <code>params.getAll('id')</code>。</p>
       <blockquote>一句话总结：useUrlParams 是一个读取 URL query 参数的自定义 Hook，先通过 useLocation 拿到当前地址，再用 URLSearchParams 解析，并按照传入顺序返回参数值。</blockquote>
-      <Link href="/" className="back-home">返回全部笔记 <span>→</span></Link>
+      <BackButton className="back-home">返回上一页 <span>→</span></BackButton>
     </article>
   </main>;
 }
