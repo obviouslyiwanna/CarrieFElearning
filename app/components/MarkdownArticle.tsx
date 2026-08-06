@@ -29,6 +29,38 @@ function isTableSeparator(line: string) {
   return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
 }
 
+function highlightCode(code: string): ReactNode[] {
+  const tokenPattern = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|<\/?[A-Za-z][^>\n]*>|\b(?:const|let|var|function|return|if|else|import|from|export|default|new|typeof|interface|type|extends|async|await)\b|\b(?:true|false|null|undefined)\b|\b\d+(?:\.\d+)?\b)/g;
+  const tokens: ReactNode[] = [];
+  let lastIndex = 0;
+  let tokenIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = tokenPattern.exec(code))) {
+    if (match.index > lastIndex) {
+      tokens.push(<span key={`plain-${tokenIndex++}`}>{code.slice(lastIndex, match.index)}</span>);
+    }
+
+    const token = match[0];
+    let className = "code-function";
+    if (token.startsWith("//") || token.startsWith("/*")) className = "code-comment";
+    else if (/^[\"'`]/.test(token)) className = "code-string";
+    else if (token.startsWith("<")) className = "code-tag";
+    else if (/^(true|false|null|undefined)$/.test(token)) className = "code-boolean";
+    else if (/^\d/.test(token)) className = "code-number";
+    else if (/^(const|let|var|function|return|if|else|import|from|export|default|new|typeof|interface|type|extends|async|await)$/.test(token)) className = "code-keyword";
+
+    tokens.push(<span className={`code-token ${className}`} key={`token-${tokenIndex++}`}>{token}</span>);
+    lastIndex = tokenPattern.lastIndex;
+  }
+
+  if (lastIndex < code.length) {
+    tokens.push(<span key={`plain-${tokenIndex}`}>{code.slice(lastIndex)}</span>);
+  }
+
+  return tokens;
+}
+
 export default function MarkdownArticle({ content }: { content: string }) {
   const lines = content.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
@@ -53,7 +85,12 @@ export default function MarkdownArticle({ content }: { content: string }) {
         index += 1;
       }
       index += 1;
-      blocks.push(<pre key={blocks.length} data-language={language}><code>{codeLines.join("\n")}</code></pre>);
+      blocks.push(
+        <div className="code-block" data-language={language || "code"} key={blocks.length}>
+          <div className="code-toolbar"><span className="code-window-dots" aria-hidden="true">● ● ●</span><span className="code-language">{language || "code"}</span><span className="code-editor-name">CarrieFElearning</span></div>
+          <pre><code>{codeLines.map((codeLine, lineIndex) => <span className="code-line" key={lineIndex}><span className="code-line-number" aria-hidden="true">{String(lineIndex + 1).padStart(2, "0")}</span><span className="code-line-content">{highlightCode(codeLine)}</span></span>)}</code></pre>
+        </div>,
+      );
       continue;
     }
 
