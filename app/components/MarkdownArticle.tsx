@@ -21,6 +21,14 @@ function renderInline(text: string): ReactNode[] {
   });
 }
 
+function parseTableRow(line: string) {
+  return line.trim().replace(/^\||\|$/g, "").split("|").map((cell) => cell.trim());
+}
+
+function isTableSeparator(line: string) {
+  return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+}
+
 export default function MarkdownArticle({ content }: { content: string }) {
   const lines = content.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
@@ -71,6 +79,23 @@ export default function MarkdownArticle({ content }: { content: string }) {
       continue;
     }
 
+    if (line.includes("|") && index + 1 < lines.length && isTableSeparator(lines[index + 1])) {
+      const headers = parseTableRow(line);
+      index += 2;
+      const rows: string[][] = [];
+      while (index < lines.length && lines[index].trim() && lines[index].includes("|")) {
+        rows.push(parseTableRow(lines[index]));
+        index += 1;
+      }
+      blocks.push(
+        <table key={blocks.length}>
+          <thead><tr>{headers.map((header, cellIndex) => <th key={cellIndex}>{renderInline(header)}</th>)}</tr></thead>
+          <tbody>{rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}>{renderInline(cell)}</td>)}</tr>)}</tbody>
+        </table>,
+      );
+      continue;
+    }
+
     if (line.startsWith("> ")) {
       const quoteLines: string[] = [];
       while (index < lines.length && lines[index].startsWith("> ")) {
@@ -91,6 +116,16 @@ export default function MarkdownArticle({ content }: { content: string }) {
       continue;
     }
 
+    if (/^\d+\.\s+/.test(line)) {
+      const items: ReactNode[] = [];
+      while (index < lines.length && /^\d+\.\s+/.test(lines[index])) {
+        items.push(<li key={items.length}>{renderInline(lines[index].replace(/^\d+\.\s+/, ""))}</li>);
+        index += 1;
+      }
+      blocks.push(<ol key={blocks.length}>{items}</ol>);
+      continue;
+    }
+
     const paragraphLines = [line];
     index += 1;
     while (
@@ -100,6 +135,8 @@ export default function MarkdownArticle({ content }: { content: string }) {
       !lines[index].startsWith("```") &&
       !lines[index].startsWith("> ") &&
       !/^[-*]\s+/.test(lines[index]) &&
+      !/^\d+\.\s+/.test(lines[index]) &&
+      !(lines[index].includes("|") && index + 1 < lines.length && isTableSeparator(lines[index + 1])) &&
       !/^(-{3,}|\*{3,})\s*$/.test(lines[index])
     ) {
       paragraphLines.push(lines[index].trimEnd());

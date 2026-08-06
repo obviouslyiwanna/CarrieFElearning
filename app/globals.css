@@ -13,4 +13,5 @@
 .article-art { display: flex; align-items: flex-end; padding: 16px 17px; }
 .article-art .article-topic { position: relative; z-index: 1; color: rgba(24,36,45,.82); font: 600 clamp(24px, 4vw, 42px)/1 "DM Mono", monospace; letter-spacing: -.08em; }
 .article-art i { display: none; }
+.article-reader ul, .article-reader ol { margin: 20px 0; padding-left: 25px; color: #566166; font-size: 14px; line-height: 2; }.article-reader table { width: 100%; margin: 25px 0; border-collapse: collapse; color: #566166; font-size: 13px; line-height: 1.7; }.article-reader th, .article-reader td { padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }.article-reader th { color: var(--ink); background: #ebe7df; font-weight: 700; }
 .back-link, .back-home { border: 0; padding: 0; background: transparent; cursor: pointer; }
