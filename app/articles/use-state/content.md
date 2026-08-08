@@ -347,24 +347,7 @@ const [todos, setTodos] = useState(createInitialTodos());
 
 前者让 React 在初始化时调用，后者会在组件函数每次执行时先调用 `createInitialTodos()`，即使后续结果不会被重新使用。
 
-## 九、结合当前项目的 Review 记录
-
-当前代码整体使用方式是合理的：
-
-- Hook 都在组件顶层调用；
-- 加载详情后通过 setter 更新页面数据；
-- `saving` 和 `submitting` 控制按钮 loading 和互斥操作；
-- `detailValidateTick` 用函数式更新，正确依赖了上一次值。
-
-可以继续关注一个类型问题：
-
-```tsx
-const [attachments, setAttachments] = useState<any[]>([]);
-```
-
-如果附件已经有明确的数据结构，最好替换成具体类型，避免 `any` 让错误漏过去。
-
-## 十、和 Vue ref 的简单对照
+## 九、和 Vue ref 的简单对照
 
 | React | Vue | 含义 |
 | --- | --- | --- |
