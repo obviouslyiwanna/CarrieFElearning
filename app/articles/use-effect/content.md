@@ -4,7 +4,7 @@
 
 ---
 
-## 一、官网里的 useEffect 是什么
+## 一、useEffect 是什么
 
 React 官方把 `useEffect` 定义为：用于让组件和外部系统保持同步的 Hook。
 
