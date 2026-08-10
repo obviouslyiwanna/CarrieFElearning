@@ -6,7 +6,6 @@ Carrie 的前端学习博客，第一阶段聚焦 React：把真实业务中的�
 
 - `app/page.tsx`：博客首页、分类筛选与搜索
 - `app/articles/`：文章详情页
-- `react学习-基于配方管理、扣款单、采退订单需求的实践总结.md`：原始学习笔记
 - `.openai/hosting.json`：Sites 部署元数据
 
 ## 本地运行
