@@ -76,11 +76,14 @@ export default function MarkdownArticle({ content }: { content: string }) {
       continue;
     }
 
-    if (line.startsWith("```")) {
-      const language = line.slice(3).trim();
+    const fence = line.match(/^(\`{3,}|~{3,})(.*)$/);
+    if (fence) {
+      const fenceMarker = fence[1];
+      const fenceCharacter = fenceMarker[0];
+      const language = fence[2].trim();
       const codeLines: string[] = [];
       index += 1;
-      while (index < lines.length && !lines[index].startsWith("```")) {
+      while (index < lines.length && !lines[index].trimStart().startsWith(fenceCharacter.repeat(fenceMarker.length))) {
         codeLines.push(lines[index]);
         index += 1;
       }
@@ -170,6 +173,7 @@ export default function MarkdownArticle({ content }: { content: string }) {
       lines[index].trim() &&
       !/^#{1,3}\s+/.test(lines[index]) &&
       !lines[index].startsWith("```") &&
+      !lines[index].startsWith("~~~") &&
       !lines[index].startsWith("> ") &&
       !/^[-*]\s+/.test(lines[index]) &&
       !/^\d+\.\s+/.test(lines[index]) &&

@@ -9,9 +9,9 @@ const themeInitScript = `
   try {
     const savedTheme = window.localStorage.getItem("carriefelearning-theme");
     const validThemes = ["paper", "lavender", "mint", "ocean"];
-    document.documentElement.dataset.theme = validThemes.includes(savedTheme) ? savedTheme : "mint";
+    document.documentElement.dataset.theme = validThemes.includes(savedTheme) ? savedTheme : "ocean";
   } catch {
-    document.documentElement.dataset.theme = "mint";
+    document.documentElement.dataset.theme = "ocean";
   }
 })();
 `;

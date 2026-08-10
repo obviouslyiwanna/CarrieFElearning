@@ -12,7 +12,7 @@ const themes = [
 
 type ThemeId = (typeof themes)[number]["id"];
 const THEME_STORAGE_KEY = "carriefelearning-theme";
-const DEFAULT_THEME: ThemeId = "mint";
+const DEFAULT_THEME: ThemeId = "ocean";
 
 export default function ThemePicker() {
   const [theme, setTheme] = useState<ThemeId>(DEFAULT_THEME);
