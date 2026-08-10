@@ -45,11 +45,10 @@ export default function Home() {
       <nav className="topbar" aria-label="主导航">
         <a className="brand" href="#top" aria-label="CarrieFElearning 首页"><span className="brand-mark">C</span><span><strong>CarrieFElearning</strong><small>frontend notes</small></span></a>
         <div className="topnav-links"><a className="active" href="#articles">学习笔记</a><a href="#roadmap">学习路线</a><a href="#about">关于我</a></div>
-        <a className="github-link" href="https://github.com/obviouslyiwanna/CarrieFElearning" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
       </nav>
 
       <section className="hero" id="top">
-        <div className="hero-copy"><p className="eyebrow"><span /> six-month learning journal</p><h1>把每一次<br /><em>前端实践</em>写下来。</h1><p className="hero-intro">CarrieFElearning 是一份六个月的新人前端学习记录：从 React 基础出发，逐步走到组件化、工程化、多端和 AI 工程化。</p><div className="hero-actions"><a className="button button-primary" href="#articles">开始阅读 <span>↓</span></a><a className="text-link" href="#roadmap">查看六个月路线 <span>→</span></a></div></div>
+        <div className="hero-copy"><p className="eyebrow"><span /> six-month learning journal</p><h1>把每一次<br /><em>前端实践</em>写下来。</h1><p className="hero-intro">CarrieFElearning 是一份前端学习记录：从 React 基础出发，逐步走到组件化、工程化、多端和 AI 工程化。</p><div className="hero-actions"><a className="button button-primary" href="#articles">开始阅读 <span>↓</span></a><a className="text-link" href="#roadmap">查看六个月路线 <span>→</span></a></div></div>
         <div className="hero-orbit" aria-label="当前学习主题"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="orbit-core"><span>React</span><small>practice<br />makes<br />clear</small></div><div className="orbit-note note-top">useEffect<br /><b>副作用</b></div><div className="orbit-note note-right">组件<br /><b>边界</b></div><div className="orbit-note note-bottom">业务<br /><b>抽象</b></div></div>
       </section>
 
