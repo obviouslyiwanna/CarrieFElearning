@@ -9,10 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function ReactBusinessPracticeArticle() {
-  return (
-    <main className="article-page">
-      <BackButton />
-      <MarkdownArticle content={content} eyebrow="React 基础 · 学习总结" />
-    </main>
-  );
+  return <main className="article-page">
+    <header className="article-page-top"><BackButton className="back-link">← 返回上一页</BackButton><span>React 基础 · 12 min</span></header>
+    <article className="article-reader">
+      <p className="eyebrow"><span /> React learning journal · 05</p>
+      <MarkdownArticle content={content} />
+      <BackButton className="back-home">返回上一页 <span>→</span></BackButton>
+    </article>
+  </main>;
 }
