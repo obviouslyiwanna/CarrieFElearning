@@ -251,7 +251,7 @@ const total = price * count;
 
 需要持久保存的状态应该使用 `useState`，需要保存可变引用可以考虑 `useRef`。
 
-## 9. 新人记忆版
+## 9. 简单流程
 
 ```text
 useMemo = 缓存计算结果
