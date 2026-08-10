@@ -14,7 +14,7 @@ function renderInline(text: string): ReactNode[] {
 
     const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (link) {
-      return <a key={index} href={link[2]}>{link[1]}</a>;
+      return <a key={index} href={link[2]} target="_blank" rel="noreferrer">{link[1]}</a>;
     }
 
     return <span key={index}>{part}</span>;
