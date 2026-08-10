@@ -1,12 +1,11 @@
 # CarrieFElearning
 
-Carrie 的前端学习博客，第一阶段聚焦 React：把真实业务中的问题、理解和验证过程写成可以回看的学习笔记。
+Carrie 的前端学习博客，把真实业务中的问题、理解和验证过程写成可以回看的学习笔记。
 
 ## 内容结构
 
 - `app/page.tsx`：博客首页、分类筛选与搜索
 - `app/articles/`：文章详情页
-- `.openai/hosting.json`：Sites 部署元数据
 
 ## 本地运行
 
