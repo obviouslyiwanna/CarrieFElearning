@@ -2,7 +2,32 @@ import type { Metadata } from "next";
 import ThemePicker from "./components/ThemePicker";
 import "./globals.css";
 
-export const metadata: Metadata = { title: "CarrieFElearning · 六个月前端学习博客", description: "记录 Carrie 从 React 基础走向组件化、工程化、多端和 AI 工程化的学习实践。", icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" } };
+const deploymentHost = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const metadataBase = new URL(deploymentHost ? `https://${deploymentHost}` : "http://localhost:3000");
+
+export const metadata: Metadata = {
+  metadataBase,
+  title: "CarrieFElearning · 前端实践学习日志",
+  description: "从真实业务代码出发，记录 React、组件化、工程化、多端与 AI 工程实践。",
+  keywords: ["React", "前端开发", "学习笔记", "工程化", "CarrieFElearning"],
+  authors: [{ name: "Carrie" }],
+  creator: "Carrie",
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  openGraph: {
+    title: "CarrieFElearning · 前端实践学习日志",
+    description: "把复杂的前端知识，写成能复用的经验。",
+    locale: "zh_CN",
+    type: "website",
+    siteName: "CarrieFElearning",
+    images: [{ url: "/og.png", width: 1536, height: 1024, alt: "CarrieFElearning 前端实践学习日志" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CarrieFElearning · 前端实践学习日志",
+    description: "把复杂的前端知识，写成能复用的经验。",
+    images: ["/og.png"],
+  },
+};
 
 const themeInitScript = `
 (() => {

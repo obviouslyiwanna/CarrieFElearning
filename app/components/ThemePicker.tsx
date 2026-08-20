@@ -14,26 +14,31 @@ type ThemeId = (typeof themes)[number]["id"];
 const THEME_STORAGE_KEY = "carriefelearning-theme";
 const DEFAULT_THEME: ThemeId = "ocean";
 
+function applyTheme(nextTheme: ThemeId) {
+  document.documentElement.dataset.theme = nextTheme;
+  window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+}
+
 export default function ThemePicker() {
   const [theme, setTheme] = useState<ThemeId>(DEFAULT_THEME);
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY) as ThemeId | null;
     const nextTheme = savedTheme && themes.some((item) => item.id === savedTheme) ? savedTheme : DEFAULT_THEME;
+    // The persisted preference is only available after the client mounts.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(nextTheme);
-    document.documentElement.dataset.theme = nextTheme;
-    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    applyTheme(nextTheme);
   }, []);
 
   function changeTheme(nextTheme: ThemeId) {
     setTheme(nextTheme);
-    document.documentElement.dataset.theme = nextTheme;
-    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    applyTheme(nextTheme);
   }
 
   return (
     <div className="theme-picker" aria-label="选择颜色主题">
-      <span className="theme-picker-label">主题</span>
+      <span className="theme-picker-label">主题色</span>
       <div className="theme-picker-options">
         {themes.map((item) => (
           <button
@@ -45,7 +50,10 @@ export default function ThemePicker() {
             style={{ "--theme-color": item.color } as CSSProperties}
             title={item.label}
             type="button"
-          />
+          >
+            <span aria-hidden="true" />
+            {item.label}
+          </button>
         ))}
       </div>
     </div>

@@ -42,27 +42,47 @@ export default function Home() {
   }, [activeCategory, query]);
 
   return (
-    <main className="site-shell">
+    <main className="site-shell" id="top">
+      <a className="skip-link" href="#articles">跳到学习笔记</a>
       <nav className="topbar" aria-label="主导航">
-        <a className="brand" href="#top" aria-label="CarrieFElearning 首页"><span className="brand-mark">C</span><span><strong>CarrieFElearning</strong><small>frontend notes</small></span></a>
-        <div className="topnav-links"><a className="active" href="#articles">学习笔记</a><a href="#roadmap">学习路线</a><a href="#about">关于我</a></div>
+        <a className="brand" href="#top" aria-label="CarrieFElearning 首页"><span className="brand-mark">C</span><span><strong>CarrieFElearning</strong><small>frontend learning log</small></span></a>
+        <div className="topnav-links"><a className="active" href="#articles">学习笔记</a><a href="#roadmap">路线图</a><a href="#about">关于</a></div>
+        <a className="github-link" href="https://github.com/obviouslyiwanna/CarrieFElearning" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
       </nav>
 
-      <section className="hero" id="top">
-        <div className="hero-copy"><p className="eyebrow"><span /> six-month learning journal</p><h1>把每一次<br /><em>前端实践</em>写下来。</h1><p className="hero-intro">CarrieFElearning 是一份前端学习记录：从 React 基础出发，逐步走到组件化、工程化、多端和 AI 工程化。</p><div className="hero-actions"><a className="button button-primary" href="#articles">开始阅读 <span>↓</span></a><a className="text-link" href="#roadmap">查看六个月路线 <span>→</span></a></div></div>
-        <div className="hero-orbit" aria-label="当前学习主题"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="orbit-core"><span>React</span><small>practice<br />makes<br />clear</small></div><div className="orbit-note note-top">useEffect<br /><b>副作用</b></div><div className="orbit-note note-right">组件<br /><b>边界</b></div><div className="orbit-note note-bottom">业务<br /><b>抽象</b></div></div>
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <p className="eyebrow"><span /> six-month learning journal</p>
+          <h1 id="hero-title">把复杂的前端知识，<em>写成能复用的经验。</em></h1>
+          <p className="hero-intro">从真实业务代码出发，记录 React、组件化、工程化、多端与 AI 工程实践。每一篇都回答一个具体问题。</p>
+          <div className="hero-actions"><a className="button button-primary" href="#articles">开始阅读 <span aria-hidden="true">↘</span></a><a className="button button-secondary" href="#roadmap">查看学习路线 <span aria-hidden="true">→</span></a></div>
+          <dl className="hero-stats"><div><dt>06</dt><dd>个月学习主线</dd></div><div><dt>06</dt><dd>篇已发布笔记</dd></div><div><dt>100%</dt><dd>来自真实实践</dd></div></dl>
+        </div>
+        <div className="hero-console" aria-label="当前学习主题：React 实战">
+          <div className="console-bar"><span className="console-dots" aria-hidden="true">● ● ●</span><span>learning.tsx</span><span className="console-status">● studying</span></div>
+          <div className="console-code" aria-hidden="true">
+            <span><i>01</i><b>const</b> learning = &#123;</span>
+            <span><i>02</i>&nbsp;&nbsp;source: <em>&quot;real business&quot;</em>,</span>
+            <span><i>03</i>&nbsp;&nbsp;method: <em>&quot;build + reflect&quot;</em>,</span>
+            <span><i>04</i>&nbsp;&nbsp;result: <strong>clearer</strong>,</span>
+            <span><i>05</i>&#125;;</span>
+          </div>
+          <div className="console-cards"><div><small>CURRENT FOCUS</small><strong>React Hooks</strong><span>状态 · 副作用 · 性能</span></div><div><small>NEXT UP</small><strong>组件化</strong><span>边界 · 复用 · 设计</span></div></div>
+          <div className="console-progress"><span><b>Month 01</b><small>in progress</small></span><div><i /></div><strong>16%</strong></div>
+        </div>
       </section>
 
       <section className="section articles-section" id="articles">
-        <div className="section-heading"><div><p className="eyebrow"><span /> latest notes</p><h2>最近在学什么</h2></div><div className="article-tools"><label className="search-box"><span aria-hidden="true">⌕</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索笔记" aria-label="搜索笔记" /></label></div></div>
+        <div className="section-heading"><div><p className="section-index">01 / NOTES</p><h2>最近在学什么</h2><p className="section-description">不是知识点清单，而是从问题出发的实践记录。</p></div><div className="article-tools"><label className="search-box"><span aria-hidden="true">⌕</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索标题、分类或内容" aria-label="搜索笔记" /></label></div></div>
         <div className="category-tabs" role="tablist" aria-label="笔记分类">{categories.map((category) => <button key={category} className={activeCategory === category ? "selected" : ""} onClick={() => setActiveCategory(category)} role="tab" aria-selected={activeCategory === category}>{category}</button>)}</div>
-        <div className="article-grid">{visibleArticles.map((article, index) => <article className={`article-card ${index === 0 ? "featured" : ""}`} key={article.title}><div className={`article-art ${article.accent}`}><span>{String(index + 1).padStart(2, "0")}</span><strong className="article-topic">{article.visual}</strong></div><div className="article-content"><div className="article-meta"><span className="tag">{article.category}</span><span>{article.status}</span></div><h3><a href={article.href}>{article.title}</a></h3><p>{article.summary}</p><div className="article-footer"><span>{article.date}</span><span>{article.readingTime} <b>→</b></span></div></div></article>)}</div>
+        <p className="result-count" aria-live="polite">共 {visibleArticles.length} 篇内容</p>
+        <div className="article-grid">{visibleArticles.map((article, index) => <article className={`article-card ${index === 0 ? "featured" : ""}`} key={article.title}><div className={`article-art ${article.accent}`}><span>{String(index + 1).padStart(2, "0")}</span><strong className="article-topic">{article.visual}</strong><i aria-hidden="true">&#123; &#125;</i></div><div className="article-content"><div className="article-meta"><span className="tag">{article.category}</span><span className={`status ${article.status === "已发布" ? "published" : "learning"}`}>{article.status}</span></div><h3><a href={article.href}>{article.title}</a></h3><p>{article.summary}</p><div className="article-footer"><span>{article.date}</span><span>{article.readingTime} <b aria-hidden="true">↗</b></span></div></div></article>)}</div>
         {visibleArticles.length === 0 && <p className="empty-state">没有找到匹配的笔记，换个关键词试试。</p>}
       </section>
 
-      <section className="section roadmap" id="roadmap"><div className="roadmap-intro"><p className="eyebrow"><span /> the six-month path</p><h2>先把地图分开，再逐个走进去。</h2><p>每个月只保留一个主线专项，文章先记录问题和实践，后续再逐步补充源码、案例和复盘。</p></div><div className="roadmap-steps">{learningTracks.map((track) => <div className={`roadmap-step ${track.status}`} key={track.month}><span>{track.month}</span><div><b>{track.title}</b><small>{track.subtitle}</small><p>{track.detail}</p></div></div>)}</div></section>
+      <section className="section roadmap" id="roadmap"><div className="roadmap-intro"><p className="section-index">02 / ROADMAP</p><h2>六个月，一次有方向的前端进阶。</h2><p>每个月只保留一个主线专项。先解决实际问题，再补原理、案例和复盘，让学习真正形成闭环。</p><a className="text-link" href="#articles">从第一个专题开始 <span aria-hidden="true">↗</span></a></div><div className="roadmap-steps">{learningTracks.map((track) => <div className={`roadmap-step ${track.status}`} key={track.month}><span>{track.month}</span><div><div className="roadmap-title"><b>{track.title}</b><i>{track.status === "current" ? "进行中" : "待解锁"}</i></div><small>{track.subtitle}</small><p>{track.detail}</p></div></div>)}</div></section>
 
-      <footer className="footer" id="about"><div><strong>CarrieFElearning</strong><span>learn in public, one note at a time.</span></div><span>© 2026 Carrie · Built with curiosity</span></footer>
+      <footer className="footer" id="about"><div><strong>CarrieFElearning</strong><span>把实践写下来，把模糊变清楚。</span></div><div className="footer-links"><a href="#top">回到顶部 ↑</a><a href="https://github.com/obviouslyiwanna/CarrieFElearning" target="_blank" rel="noreferrer">GitHub ↗</a></div><span>© 2026 Carrie · Built with curiosity</span></footer>
     </main>
   );
 }
