@@ -18,7 +18,7 @@ export default function MarsMemberPdfPrintTaskPracticeArticle() {
       </header>
       <article className="article-reader">
         <p className="eyebrow">
-          <span /> React learning journal · 07
+          <span /> React learning journal · 08
         </p>
         <MarkdownArticle content={content} />
         <BackButton className="back-home">

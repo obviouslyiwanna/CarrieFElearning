@@ -20,6 +20,8 @@ const articles: Article[] = [
   { title: "React 学习笔记：useMemo", summary: "理解 useMemo 的依赖、缓存和引用稳定性，并结合配方物料配置页面分析实际用法。", category: "React 基础", date: "2026.08.07", readingTime: "8 min", accent: "orange", status: "已发布", href: "/articles/use-memo", visual: "useMemo" },
   { title: "React 学习笔记：useCallback", summary: "理解 useCallback 如何缓存函数引用、依赖数组如何工作，以及它在组件性能优化中的实际应用。", category: "React 基础", date: "2026.08.10", readingTime: "8 min", accent: "blue", status: "已发布", href: "/articles/use-call-back", visual: "useCallback" },
   { title: "从三个业务需求学习 React", summary: "从配方管理、采退订单和扣款单的共同页面模式出发，梳理状态、副作用、组件边界和业务表单中的 React 学习重点。", category: "React 基础", date: "2026.08.08", readingTime: "12 min", accent: "blue", status: "已发布", href: "/articles/react-business-practice", visual: "业务 × React" },
+  { title: "H5 要货单与发货单详情：需求回顾与 React 工程档案", summary: "从两张履约单据的真实实现出发，复盘详情页的数据流、适配层、页面复用、状态动作与 H5 工程边界。", category: "React 基础", date: "2026.09.11", readingTime: "25 min", accent: "green", status: "已发布", href: "/articles/demand-shipment-detail-practice", visual: "React × Taro" },
+  { title: "mars-member 货品码 PDF：从需求到落地", summary: "沿着创建任务、轮询数据、绘制标签、生成 PDF、上传 OSS 和签名下载，复盘一条完整的前端业务链路。", category: "React 基础", date: "2026.09.11", readingTime: "22 min", accent: "orange", status: "已发布", href: "/articles/mars-member-pdf-print-task-practice", visual: "PDF × React" },
   { title: "从 React 上层进入组件化", summary: "MarsKit、Ant Design 和二次开发：从组件使用者走向组件设计者。", category: "React 上层与组件化", date: "第 2 个月", readingTime: "规划中", accent: "blue", status: "学习中", href: "#roadmap", visual: "组件化" },
   { title: "从 CRA 到 Webpack 的工程化链路", summary: "先看懂旧项目怎么编译，再补齐 lint、构建、发布和 Webpack 配置。", category: "工程化与构建", date: "第 3 个月", readingTime: "规划中", accent: "orange", status: "学习中", href: "#roadmap", visual: "Webpack" },
   { title: "Taro 小程序与多端实践", summary: "理解一套代码适配多端的边界，记录平台差异、运行原理和踩坑。", category: "小程序与多端", date: "第 4 个月", readingTime: "规划中", accent: "green", status: "学习中", href: "#roadmap", visual: "Taro" },
@@ -56,7 +58,7 @@ export default function Home() {
           <h1 id="hero-title">把复杂的前端知识，<em>写成能复用的经验。</em></h1>
           <p className="hero-intro">从真实业务代码出发，记录 React、组件化、工程化、多端与 AI 工程实践。每一篇都回答一个具体问题。</p>
           <div className="hero-actions"><a className="button button-primary" href="#articles">开始阅读 <span aria-hidden="true">↘</span></a><a className="button button-secondary" href="#roadmap">查看学习路线 <span aria-hidden="true">→</span></a></div>
-          <dl className="hero-stats"><div><dt>06</dt><dd>个月学习主线</dd></div><div><dt>06</dt><dd>篇已发布笔记</dd></div><div><dt>100%</dt><dd>来自真实实践</dd></div></dl>
+          <dl className="hero-stats"><div><dt>06</dt><dd>个月学习主线</dd></div><div><dt>08</dt><dd>篇已发布笔记</dd></div><div><dt>100%</dt><dd>来自真实实践</dd></div></dl>
         </div>
         <div className="hero-console" aria-label="当前学习主题：React 实战">
           <div className="console-bar"><span className="console-dots" aria-hidden="true">● ● ●</span><span>learning.tsx</span><span className="console-status">● studying</span></div>

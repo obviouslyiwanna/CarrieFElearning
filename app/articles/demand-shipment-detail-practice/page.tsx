@@ -18,7 +18,7 @@ export default function DemandShipmentDetailPracticeArticle() {
       </header>
       <article className="article-reader">
         <p className="eyebrow">
-          <span /> React learning journal · 06
+          <span /> React learning journal · 07
         </p>
         <MarkdownArticle content={content} />
         <BackButton className="back-home">
